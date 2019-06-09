@@ -1,6 +1,4 @@
 #include <vector>
-struct double3{
-    double x,y,z;
-};
+#include "structure.hpp"
 
 std::vector<double3> loadfile(std::string filename);

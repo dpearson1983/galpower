@@ -8,5 +8,5 @@ int main(){
     std::vector<double3> galaxies;
     filename = "LNKNLogsVelFortran_01.dat";
     galaxies = loadfile(filename);
-    std::cout << "size = "<< galaxies.size()<<" " << galaxies[0].y << std::endl;
+    std::cout << "size = "<< galaxies.size()<<" " << galaxies[0].z << std::endl;
 }
