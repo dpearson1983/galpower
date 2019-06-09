@@ -2,11 +2,13 @@
 #include <vector>
 #include "loadfile.hpp"
 
-
 int main(){
-    std::string filename;
-    std::vector<double3> galaxies;
-    filename = "LNKNLogsVelFortran_01.dat";
-    galaxies = loadfile(filename);
-    std::cout << "size = "<< galaxies.size()<<" " << galaxies[0].z << std::endl;
+    std::string filename = "LNKNLogsVelFortran_01.dat";
+    Loadfile newfile;
+    
+    newfile.loadfile(filename);
+    
+    std::cout << "size = "<< newfile.get_size()<<" " << std::endl;
 }
+
+
