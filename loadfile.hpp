@@ -6,6 +6,7 @@
 
 class Loadfile {
     std::vector<double3> galaxies;
+    std::vector<double> dr;
     public:
         void loadfile();
         void loadfile(std::string filename);
