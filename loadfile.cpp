@@ -60,6 +60,19 @@ int Loadfile::get_size(){
 }
 
 
-
-//void binNGP(std::vector <double3> &galaxies, std::vector )
+void Loadfile::binNGP(std::vector<double3> &galaxies, std::vector<double> &dr, int4 N , double3 L) {
+    N.w = N.x*N.y*N.z;
+    double3 Delta_r = {L.x/N.x, L.y/N.y, L.z/N.z};
+    for (size_t tid = 0; tid < galaxies.size(); ++tid) {
+        int i = galaxies[tid].x/Delta_r.x;
+        int j = galaxies[tid].y/Delta_r.y;
+        int k = galaxies[tid].z/Delta_r.z;
+        
+        int index = k + N.z*(j + N.y*i);
+        if (index < N.w) {
+            dr[index] += 1.0;
+        }
+    }
+    std::cout << std::endl;
+}
 
