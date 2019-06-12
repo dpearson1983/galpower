@@ -4,7 +4,7 @@
 
 
 
-class Grid {
+class Load {
     std::vector<double3> galaxies;
     std::vector<double> dr;
     public:

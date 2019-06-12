@@ -7,7 +7,7 @@
 
 
 
-void Grid::load() {
+void Load::load() {
     std::string filename;
     std::cout << "Enter the filename :\n";
     std::cin >> filename;
@@ -33,7 +33,7 @@ void Grid::load() {
         throw std::runtime_error(errMsg.str());
     }
 }    
-void Grid::load(std::string filename) {
+void Load::load(std::string filename) {
     if (std::ifstream (filename)){
         std::ifstream fin(filename);
         std::string dummyLine;
@@ -55,12 +55,12 @@ void Grid::load(std::string filename) {
     }
 }   
 
-int Grid::get_size(){
+int Load::get_size(){
     return galaxies.size();
 }
 
 
-void Grid::binNGP(std::vector<double3> &galaxies, std::vector<double> &dr, int4 N , double3 L) {
+void Load::binNGP(std::vector<double3> &galaxies, std::vector<double> &dr, int4 N , double3 L) {
     N.w = N.x*N.y*N.z;
     double3 Delta_r = {L.x/N.x, L.y/N.y, L.z/N.z};
     for (size_t tid = 0; tid < galaxies.size(); ++tid) {
