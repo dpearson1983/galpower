@@ -4,7 +4,7 @@
 
 int main(){
     std::string filename = "LNKNLogsVelFortran_01.dat";
-    Load newfile;
+    grid newfile;
     
     newfile.load(filename);
     
