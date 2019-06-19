@@ -1,6 +1,9 @@
 #ifndef _GRID_HPP_
 #define _GRID_HPP_
 
+#include <vector>
+#include "structure"
+
 class grid{
     protected:
         int4 N;

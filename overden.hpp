@@ -13,9 +13,14 @@ class overden : public grid{
     std::vector<double> getFrequencies(int n, double l);
     
     public:
-        overden(numden &n_g, numden &n_r);
+        // Override the definition from parent class due to different size needed for the in-place FFT
+        overden(int4 N, double4 L);
         
-        void init(numden &n_g, numdem &n_r);
+        overden(int4 N, double4 L, numden &n_g, numden &n_r);
+        
+        void init(int4 N, double4 L);
+        
+        void init(int4 N, double4 L, numden &n_g, numdem &n_r);
         
         void transform();
         
