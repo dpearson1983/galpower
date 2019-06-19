@@ -11,10 +11,8 @@ class grid{
     double4 L; // Stores physical dimensions and volume
     double3 Delta_r, r_min; // Delta_r stores grid spacing, r_min stores the minimum position allowed (0,0,0) by 
                             // default
-    std::vector<double3> gals;                        
     std::vector<double> k_x, k_y, k_z; // Storage for the frequecies
     std::vector<double> F; // The grid itself
-    
     // We'll want to add storage for a fftw plan here at some point as well.
     
     public:

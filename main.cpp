@@ -8,7 +8,7 @@ int main(){
     
     newfile.load(filename);
     
-    std::cout << "size = "<< newfile.get_size()<<" " << std::endl;
+//     std::cout << "size = "<< newfile.get_size()<<" " << std::endl;
    
 }
 

@@ -46,11 +46,77 @@ void grid::init(int4 N, double4 L, double3 r_min) {
     this->F = std::vector<double>(N.w);
 }
 
+grid::grid(int4 N, double4 L,std::vector<double3> &gals, double3 r_min){
+    grid::init(N, L,gals, r_min);
+}
+
+void grid::init(int4 N, double4 L, std::vector<double3> &gals, double3 r_min){
+    this->N = N;
+    this->L = L;
+    this->r_min = r_min;
+    this->Delta_r = {L.x/N.x, L.y/N.y, L.z/N.z};
+    
+    // The fftFrequencies would be a function defined in fft_helpers.hpp (which we should create) that
+    // returns a std::vector<double> which we then store in our data members.
+//     this->k_x = fftFrequencies(N.x, L.x);
+//     this->k_y = fftFrequencies(N.y, L.y);
+//     this->k_z = fftFrequencies(N.z, L.z);
+    
+    // This line just calls the constructor for the vector, creating an empty vector and copying to
+    // our data member.
+    this->F = std::vector<double>(N.w);
+}
+
+
+grid::grid(int3 N, double3 L, double3 r_min){
+    grid::init(N, L, r_min);
+}
+
+void grid::init(int3 N, double3 L, double3 r_min) {
+
+    this->N = {N.x, N.y, N.z, N.x*N.y*N.z};
+    this->L = {L.x, L.y, L.z, L.x*L.y*L.z};
+    this->r_min = r_min;
+    this->Delta_r = {L.x/N.x, L.y/N.y, L.z/N.z};
+    
+    // The fftFrequencies would be a function defined in fft_helpers.hpp (which we should create) that
+    // returns a std::vector<double> which we then store in our data members.
+//     this->k_x = fftFrequencies(N.x, L.x);
+//     this->k_y = fftFrequencies(N.y, L.y);
+//     this->k_z = fftFrequencies(N.z, L.z);
+    
+    // This line just calls the constructor for the vector, creating an empty vector and copying to
+    // our data member.
+    this->F = std::vector<double>(N.x*N.y*N.z);
+}
+
+grid::grid(int3 N, double3 L, std::vector<double3> &gals, double3 r_min){
+    grid::init(N, L, gals, r_min);
+}
+
+void grid::init(int3 N, double3 L, std::vector<double3> &gals, double3 r_min){
+    this->N = {N.x, N.y, N.z, N.x*N.y*N.z};
+    this->L = {L.x, L.y, L.z, L.x*L.y*L.z};
+    this->r_min = r_min;
+    this->Delta_r = {L.x/N.x, L.y/N.y, L.z/N.z};
+    
+    // The fftFrequencies would be a function defined in fft_helpers.hpp (which we should create) that
+    // returns a std::vector<double> which we then store in our data members.
+//     this->k_x = fftFrequencies(N.x, L.x);
+//     this->k_y = fftFrequencies(N.y, L.y);
+//     this->k_z = fftFrequencies(N.z, L.z);
+    
+    // This line just calls the constructor for the vector, creating an empty vector and copying to
+    // our data member.
+    this->F = std::vector<double>(N.x*N.y*N.z);
+}
+
 // All other functions would need to be defined below here.
 
 
 
 void grid::load() {
+     std::vector<double3> gals;
     std::string filename;
     std::cout << "Enter the filename :\n";
     std::cin >> filename;
@@ -68,6 +134,7 @@ void grid::load() {
             }
         }
         fin.close();
+        binNGP(gals);
     }
     else {
         std::stringstream errMsg;
@@ -77,6 +144,7 @@ void grid::load() {
     }
 }    
 void grid::load(std::string filename) {
+     std::vector<double3> gals;
     if (std::ifstream (filename)){
         std::ifstream fin(filename);
         std::string dummyLine;
@@ -89,6 +157,7 @@ void grid::load(std::string filename) {
             }
         }
         fin.close();
+        binNGP(gals);
     }
     else {
         std::stringstream errMsg;
@@ -98,13 +167,13 @@ void grid::load(std::string filename) {
     }
 }   
 
-int grid::get_size(){
-    return gals.size();
-}
+// int grid::get_size(){
+//     return gals.size();
+// }
 
 
 void grid::binNGP(std::vector<double3> &gals) {
-    N.w = N.x*N.y*N.z;
+//     N.w = N.x*N.y*N.z;
     for (size_t tid = 0; tid < gals.size(); ++tid) {
         int i = gals[tid].x/Delta_r.x;
         int j = gals[tid].y/Delta_r.y;
