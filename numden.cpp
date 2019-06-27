@@ -186,3 +186,4 @@ void grid::binNGP(std::vector<double3> &gals) {
         }
     }
 }
+ 
