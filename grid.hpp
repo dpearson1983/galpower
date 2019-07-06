@@ -2,7 +2,7 @@
 #define _GRID_HPP_
 
 #include <vector>
-#include "structure"
+#include "structure.hpp"
 
 class grid{
     protected:
