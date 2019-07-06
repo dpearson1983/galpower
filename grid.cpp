@@ -29,14 +29,14 @@ void grid::init(int4 N, double4 L) {
 }
 
 double grid::get(int i, int j, int k){
-    
+    return N.x[i],N.y[j],N.z[k];
 }
 
 int4 grid::getsize(){
-    return N.size()
+    return N.size();
 }
 
 double4 grid::getDimention(){
-    return L.size()
+    return L.size();
 }
     
