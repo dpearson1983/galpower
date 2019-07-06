@@ -40,3 +40,7 @@ double4 grid::getDimention(){
     return L.size();
 }
     
+void grid::rezeroGrid(){
+    grid();
+}
+    
