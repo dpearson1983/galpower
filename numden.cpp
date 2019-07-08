@@ -34,10 +34,12 @@ void numden::init(int4 N, double4 L, double3 r_min) {
     this->F = std::vector<double>(N.w);
 }
 
-numden::numden(int4 N, double4 L,std::vector<double3> &gals, double3 r_min){
-    numden::init(N, L,gals, r_min);
+numden::numden(int4 N, double4 L, std::vector<double3> &gals, double3 r_min){
+    numden::init(N, L, gals, r_min);
 }
 
+// NOTE: Since we are passing the list of galaxies to the function here, we need to call binNGP so that
+// the galaxies are binned to the grid.
 void numden::init(int4 N, double4 L, std::vector<double3> &gals, double3 r_min){
     this->N = N;
     this->L = L;
@@ -70,6 +72,8 @@ numden::numden(int3 N, double3 L, std::vector<double3> &gals, double3 r_min){
     numden::init(N, L, gals, r_min);
 }
 
+// NOTE: Since we are passing the list of galaxies to the function here, we need to call binNGP so that
+// the galaxies are binned to the grid.
 void numden::init(int3 N, double3 L, std::vector<double3> &gals, double3 r_min){
     this->N = {N.x, N.y, N.z, N.x*N.y*N.z};
     this->L = {L.x, L.y, L.z, L.x*L.y*L.z};
@@ -84,7 +88,10 @@ void numden::init(int3 N, double3 L, std::vector<double3> &gals, double3 r_min){
 // All other functions would need to be defined below here.
 
 
-   
+// NOTE: This should be moved to a file_reader.cpp file which contains the definitions for everything in
+// the file_reader.hpp class definition, except the enum class part which doesn't need anything further. That
+// function would be called from main.cpp and then the galaxies would be passed to one of the other functions
+// here, either one of the constructors that accepts it as an argument, or to binNGP directly.
 void grid::loadfile(std::string filename) {
     std::vector<double3> gals;
     if (std::ifstream (filename)){
@@ -99,7 +106,9 @@ void grid::loadfile(std::string filename) {
             }
         }
         fin.close();
-        binNGP(gals)
+        binNGP(gals); // NOTE: When moved, you won't call this function here. Instead loadfile will have a
+                      // return type of std::vector<double3>, and you will have to add return gals; at the 
+                      // end of the function.
     }
     else {
         std::stringstream errMsg;
