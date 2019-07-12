@@ -53,6 +53,6 @@ double4 grid::getDimention(){
 //      2. Call grid::init(this->N, this->L) which will set the grid equal to a new vector with all elements
 //         equal to zero.
 void grid::rezeroGrid(){
-    grid::init(this->N = {0,0,0,0}, this->L = {0,0,0,0});
+    grid::init(this->N, this->L);
 }
     
