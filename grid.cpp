@@ -32,18 +32,19 @@ void grid::init(int4 N, double4 L) {
 // Since F is a flattened array, first compute the flattened array index [e.g. k + N.z*(j + N.y*i)] and then
 // return the value of F at that index.
 double grid::get(int i, int j, int k){
-    return N.x[i],N.y[j],N.z[k];
+    int index = k + N.z*(j + N.y*i);
+    return F[index];
 }
 
 // NOTE: The int4 and double4 structures don't have a size member function, so there will be an error here.
 // instead these two functions can simply have "return this->N;" or "return this->L;" to give the desired
 // information.
 int4 grid::getsize(){
-    return N.size();
+    return this->N;
 }
 
 double4 grid::getDimention(){
-    return L.size();
+    return this->L;
 }
 
 // NOTE: Calling the default constructor here will only set the dimensions on the grid to zero. We want to set 
@@ -52,6 +53,6 @@ double4 grid::getDimention(){
 //      2. Call grid::init(this->N, this->L) which will set the grid equal to a new vector with all elements
 //         equal to zero.
 void grid::rezeroGrid(){
-    grid();
+    grid::init(this->N = {0,0,0,0}, this->L = {0,0,0,0});
 }
     
